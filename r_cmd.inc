@@ -39,29 +39,28 @@ public OnGameModeInit(){
 	forward r_cmd_OnGameModeInit();
 #endif
 
-public OnPlayerCommandText(playerid, cmdtext[]){
+public OnPlayerCommandText(playerid, cmdtext[])
+{
 	new regex:r_with_param = regex_new("\\/\\s*(\\w{1,15})\\s+(.+)"),match_results:m,cmd[16], params[256],cmd_length, params_length,funcname[MAX_FUNC_NAME];
-    if (regex_match(cmdtext, r_with_param, m))
-    {
-        match_get_group(m, 1, cmd, cmd_length);
-        match_get_group(m, 2, params, params_length);
-        match_free(m);
-    }
-    else
-    {
-        new regex:r = regex_new("\\/\\s*(\\w{1,15})\\s*");
-        if (regex_match(cmdtext, r, m))
-        {
-            match_get_group(m, 1, cmd, cmd_length);
-            match_free(m);
-        }
-        regex_delete(r);
-    }
-    regex_delete(r_with_param);
-    UncapitalizeString(cmd);
-    format(funcname, sizeof(funcname), "cmd_%s", cmd);
-   
-	
+    	if (regex_match(cmdtext, r_with_param, m))
+	{
+        	match_get_group(m, 1, cmd, cmd_length);
+        	match_get_group(m, 2, params, params_length);
+        	match_free(m);
+    	}
+    	else
+    	{
+        	new regex:r = regex_new("\\/\\s*(\\w{1,15})\\s*");
+        	if (regex_match(cmdtext, r, m))
+        	{
+            		match_get_group(m, 1, cmd, cmd_length);
+            		match_free(m);
+        	}
+        	regex_delete(r);
+    	}
+    	regex_delete(r_with_param);
+    	UncapitalizeString(cmd);
+    	format(funcname, sizeof(funcname), "cmd_%s", cmd);
 	if(params_length == 0)
 	{
 		if (r_OPCP)
@@ -70,7 +69,7 @@ public OnPlayerCommandText(playerid, cmdtext[]){
 		}
 		return CallLocalFunction(funcname, "is", playerid, "\1");
 	}
-    if (r_OPCP)
+    	if (r_OPCP)
 	{
 		return CallLocalFunction("OnPlayerCommandPerformed", "isi", playerid, cmdtext, CallLocalFunction(funcname, "is", playerid,params));
 	}
