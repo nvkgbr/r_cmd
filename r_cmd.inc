@@ -58,8 +58,9 @@ public OnPlayerCommandText(playerid, cmdtext[]){
         regex_delete(r);
     }
     regex_delete(r_with_param);
-    format(funcname, sizeof(funcname), "cmd_%s", cmd);
     UncapitalizeString(cmd);
+    format(funcname, sizeof(funcname), "cmd_%s", cmd);
+   
 	
 	if(params_length == 0)
 	{
@@ -71,7 +72,6 @@ public OnPlayerCommandText(playerid, cmdtext[]){
 	}
     if (r_OPCP)
 	{
-		UncapitalizeString(params);
 		return CallLocalFunction("OnPlayerCommandPerformed", "isi", playerid, cmdtext, CallLocalFunction(funcname, "is", playerid,params));
 	}
 	return CallLocalFunction(funcname, "is", playerid, params);
