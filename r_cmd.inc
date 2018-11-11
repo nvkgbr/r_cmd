@@ -41,24 +41,24 @@ public OnGameModeInit(){
 
 public OnPlayerCommandText(playerid, cmdtext[])
 {
-	new regex:r_with_param = regex_new("\\/\\s*(\\w{1,15})\\s+(.+)"),match_results:m,cmd[16], params[256],cmd_length, params_length,funcname[MAX_FUNC_NAME];
-    	if (regex_match(cmdtext, r_with_param, m))
+	new Regex:r_with_param = Regex_New("\\/\\s*(\\w{1,15})\\s+(.+)"),RegexMatch:m,cmd[16], params[256],cmd_length, params_length,funcname[MAX_FUNC_NAME];
+    	if (Regex_Match(cmdtext, r_with_param, m))
 	{
-        	match_get_group(m, 1, cmd, cmd_length);
-        	match_get_group(m, 2, params, params_length);
-        	match_free(m);
+        	Match_GetGroup(m, 1, cmd, cmd_length);
+        	Match_GetGroup(m, 2, params, params_length);
+        	Match_Free(m);
     	}
     	else
     	{
-        	new regex:r = regex_new("\\/\\s*(\\w{1,15})\\s*");
+        	new Regex:r = Regex_Match("\\/\\s*(\\w{1,15})\\s*");
         	if (regex_match(cmdtext, r, m))
         	{
-            		match_get_group(m, 1, cmd, cmd_length);
-            		match_free(m);
+            		Match_GetGroup(m, 1, cmd, cmd_length);
+            		Match_Free(m);
         	}
-        	regex_delete(r);
+        	Regex_Delete(r);
     	}
-    	regex_delete(r_with_param);
+    	Regex_Delete(r_with_param);
     	UncapitalizeString(cmd);
     	format(funcname, sizeof(funcname), "cmd_%s", cmd);
 	if(params_length == 0)
