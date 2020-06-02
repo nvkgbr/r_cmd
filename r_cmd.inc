@@ -1,4 +1,4 @@
-#include <pawn.regex>
+#tryinclude <pawn.regex>
 
 #if defined _r_cmd_included
 	#endinput
