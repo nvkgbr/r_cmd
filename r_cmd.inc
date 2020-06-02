@@ -94,4 +94,3 @@ stock UncapitalizeString(string[])
 	}
 	return 1;
 }
-
